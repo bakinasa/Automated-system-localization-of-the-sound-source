@@ -11,4 +11,15 @@ public class AudioModel
     Array.Copy(volumes, this.volumes, volumes.Length);
     this.duration = duration;
   }
+
+  public float Max
+  {
+    get
+    {
+      var max = volumes[0];
+      foreach (var v in volumes)
+        if (max < v) max = v;
+      return max;
+    }
+  }
 }
