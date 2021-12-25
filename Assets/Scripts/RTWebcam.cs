@@ -14,7 +14,7 @@ public class RTWebcam : MonoBehaviour
   void setDevice(WebCamDevice device)
   {
     var rect = viewport.GetComponentInParent<RectTransform>();
-    cam = new WebCamTexture(device.name, (int)rect.rect.height, (int)rect.rect.width);
+    cam = new WebCamTexture(device.name, (int)rect.rect.width, (int)rect.rect.height);
     available = true;
     viewport.texture = cam;
     cam.Play();
@@ -52,7 +52,7 @@ public class RTWebcam : MonoBehaviour
     }
 
     var ratio = (float)cam.width / (float)cam.height;
-    fitter.aspectRatio = 1 / ratio;
+    fitter.aspectRatio = ratio;
 
     var scaleY = cam.videoVerticallyMirrored ? -1f : 1f;
     viewport.rectTransform.localScale = new Vector3(1f, scaleY, 1f);
