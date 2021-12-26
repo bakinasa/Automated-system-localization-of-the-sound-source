@@ -46,6 +46,15 @@ public class SlideshowController : MonoBehaviour
   public async void Quit()
   {
     if (manager.IsRecording) await StopRecord();
+    manager.Dispose();
     SceneManager.LoadScene("Main");
+  }
+
+  void Update()
+  {
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+      Quit();
+    }
   }
 }

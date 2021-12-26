@@ -17,4 +17,12 @@ public class MainManager : MonoBehaviour
     magicButton.onClick.AddListener(() => SceneManager.LoadScene("Magic"));
     galleryButton.onClick.AddListener(() => SceneManager.LoadScene("Gallery"));
   }
+
+  void Update()
+  {
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+      Application.Quit();
+    }
+  }
 }

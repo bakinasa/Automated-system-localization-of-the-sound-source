@@ -120,4 +120,9 @@ public class SlideshowManager : MonoBehaviour
     slideshow = null;
     return res;
   }
+
+  public void Dispose()
+  {
+    cam.Stop();
+  }
 }

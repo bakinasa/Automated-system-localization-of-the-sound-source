@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GalleryManager : MonoBehaviour
@@ -125,6 +126,16 @@ public class GalleryManager : MonoBehaviour
     {
       viewport.SetTexture(selectedSlideshow.images[i % selectedSlideshow.images.Count]);
       yield return new WaitForSecondsRealtime(DELTA_T);
+    }
+  }
+
+  void Update()
+  {
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+      if (selectedFname == null) SceneManager.LoadScene("Main");
+      else
+        PressBack();
     }
   }
 }
