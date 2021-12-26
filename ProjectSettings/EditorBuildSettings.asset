@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Gallery.unity
-    guid: 271fbe21f03546a43bd4772d3f743012
-  - enabled: 1
     path: Assets/Scenes/Begin.unity
     guid: 78af16645990b44a58574f71b7718b67
   - enabled: 1
@@ -20,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Magic.unity
     guid: f35a7367e9de9965eb544d7b0dc97226
+  - enabled: 1
+    path: Assets/Scenes/Gallery.unity
+    guid: 271fbe21f03546a43bd4772d3f743012
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
