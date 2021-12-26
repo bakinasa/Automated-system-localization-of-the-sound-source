@@ -38,7 +38,7 @@ public class Slideshow
     return fname;
   }
 
-  public async Task<Slideshow> LoadFromFile(string fname)
+  public static async Task<Slideshow> LoadFromFile(string fname)
   {
     var file = File.OpenRead(fname);
     var ss = new Slideshow();

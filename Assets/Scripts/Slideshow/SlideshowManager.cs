@@ -67,6 +67,9 @@ public class SlideshowManager : MonoBehaviour
     for (int i = 0; i < RING_SIZE; ++i)
       ring[i] = new Texture2D(cam.width, cam.height);
     ringPos = 0;
+    PlayerPrefs.SetInt("mirrored", cam.videoVerticallyMirrored ? 1 : 0);
+    PlayerPrefs.SetInt("orient", -cam.videoRotationAngle);
+    PlayerPrefs.Save();
     StartCoroutine(CaptureCycle());
   }
 
