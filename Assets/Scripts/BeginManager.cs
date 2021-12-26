@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class BeginManager : MonoBehaviour
 {
   private const string prefsKey = "permissionsGranted";
-  //   private string[] permissions = { Permission.Camera, Permission.Microphone };
-  private string[] permissions = { };
+  private string[] permissions = { Permission.Camera, Permission.Microphone };
   [SerializeField]
   private Button nextButton;
 
