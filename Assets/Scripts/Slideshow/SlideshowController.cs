@@ -32,7 +32,8 @@ public class SlideshowController : MonoBehaviour
 
   public void StopRecord()
   {
-    manager.StopRecording();
+    if (manager.IsRecording)
+      manager.StopRecording();
     UpdateIndicator();
   }
 

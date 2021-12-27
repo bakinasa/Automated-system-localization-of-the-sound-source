@@ -23,6 +23,7 @@ public class CalibrationManager : ISolver
 
   void Start()
   {
+    calibrateButton.onClick.AddListener(PressCalibrate);
     var width = parent.rect.width;
     var height = parent.rect.height;
     var wone = width / objects.Length;
@@ -57,6 +58,7 @@ public class CalibrationManager : ISolver
 
   void PressCalibrate()
   {
+    print("here");
     var mx = values[0];
     foreach (var val in values)
     {

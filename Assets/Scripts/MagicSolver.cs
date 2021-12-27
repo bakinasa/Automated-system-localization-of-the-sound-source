@@ -10,9 +10,11 @@ public class MagicSolver : ISolver
   void Start()
   {
     threshold = PlayerPrefs.GetFloat(CalibrationManager.CALIBRATE_KEY, 0.5f);
+    print(threshold);
   }
   public override void OnProcess(AudioModel model)
   {
+    print(model.Mean);
     if (model.Mean > threshold)
     {
       if (counter <= 0) controller.StartRecord();
