@@ -23,21 +23,6 @@ public class Slideshow
     }
   }
 
-  public async Task<string> SaveToFile(string dir)
-  {
-    var fname = String.Format("{0}/{1}", dir, Filename);
-    var file = File.OpenWrite(fname);
-    foreach (var image in images)
-    {
-      var bytes = image.EncodeToPNG();
-      await file.WriteAsync(BitConverter.GetBytes(bytes.Length), 0, 4);
-      await file.WriteAsync(BitConverter.GetBytes(image.width), 0, 4);
-      await file.WriteAsync(BitConverter.GetBytes(image.height), 0, 4);
-      await file.WriteAsync(bytes, 0, bytes.Length);
-    }
-    return fname;
-  }
-
   public static async Task<Slideshow> LoadFromFile(string fname)
   {
     var file = File.OpenRead(fname);

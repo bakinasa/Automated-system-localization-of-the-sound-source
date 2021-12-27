@@ -23,29 +23,28 @@ public class SlideshowController : MonoBehaviour
     recordingIndicator.enabled = manager.IsRecording;
   }
 
-  public async Task StartRecord()
+  public void StartRecord()
   {
-    if (manager.IsRecording) await StopRecord();
+    if (manager.IsRecording) StopRecord();
     manager.StartRecording();
     UpdateIndicator();
   }
 
-  public async Task StopRecord()
+  public void StopRecord()
   {
-    var ss = manager.StopRecording();
+    manager.StopRecording();
     UpdateIndicator();
-    await ss.SaveToFile(Application.persistentDataPath);
   }
 
-  public async void StartStopRecord()
+  public void StartStopRecord()
   {
-    if (manager.IsRecording) await StopRecord();
-    else await StartRecord();
+    if (manager.IsRecording) StopRecord();
+    else StartRecord();
   }
 
-  public async void Quit()
+  public void Quit()
   {
-    if (manager.IsRecording) await StopRecord();
+    if (manager.IsRecording) StopRecord();
     manager.Dispose();
     SceneManager.LoadScene("Main");
   }

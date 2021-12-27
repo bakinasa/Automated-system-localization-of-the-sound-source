@@ -19,13 +19,13 @@ public class SlideshowManager : MonoBehaviour
 
   private Texture2D[] ring;
   private int ringPos;
-  private Slideshow slideshow;
+  private SlideshowWriter writer;
 
   public bool IsRecording
   {
     get
     {
-      return slideshow != null;
+      return writer != null;
     }
   }
 
@@ -35,7 +35,7 @@ public class SlideshowManager : MonoBehaviour
     if (device.isFrontFacing)
       cam = new WebCamTexture(device.name, 600, 300);
     else
-      cam = new WebCamTexture(device.name, (int)rect.width, (int)rect.height);
+      cam = new WebCamTexture(device.name, (int)rect.width / 2, (int)rect.height / 2);
     available = true;
     cam.Play();
   }
@@ -77,6 +77,11 @@ public class SlideshowManager : MonoBehaviour
   {
     while (available)
     {
+      if (!cam.isPlaying)
+      {
+        yield return new WaitForSecondsRealtime(DELTA_T);
+        continue;
+      }
       var currTime = Time.time;
       yield return new WaitForEndOfFrame();
       ring[ringPos].SetPixels(cam.GetPixels());
@@ -84,12 +89,12 @@ public class SlideshowManager : MonoBehaviour
       viewport.mirrored = cam.videoVerticallyMirrored;
       viewport.orient = -cam.videoRotationAngle;
       viewport.SetTexture(ring[ringPos]);
-      if (slideshow != null)
+      if (writer != null)
       {
         var tex = new Texture2D(cam.width, cam.height);
         Graphics.CopyTexture(ring[ringPos], tex);
         tex.Apply();
-        slideshow.images.Add(tex);
+        writer.Add(tex);
       }
       ringPos++;
       if (ringPos == RING_SIZE) ringPos = 0;
@@ -102,22 +107,22 @@ public class SlideshowManager : MonoBehaviour
   public void StartRecording()
   {
     var pos = ringPos;
-    var ss = new Slideshow();
+    var ss = new SlideshowWriter(Application.persistentDataPath);
     var tex = new Texture2D(cam.width, cam.height);
     Graphics.CopyTexture(ring[pos == 0 ? RING_SIZE - 1 : pos - 1], tex);
     tex.Apply();
-    ss.images.Add(tex);
+    ss.Add(tex);
     tex = new Texture2D(cam.width, cam.height);
     Graphics.CopyTexture(ring[pos], tex);
     tex.Apply();
-    ss.images.Add(tex);
-    slideshow = ss;
+    ss.Add(tex);
+    writer = ss;
   }
 
-  public Slideshow StopRecording()
+  public string StopRecording()
   {
-    var res = slideshow;
-    slideshow = null;
+    var res = writer.Dispose();
+    writer = null;
     return res;
   }
 
