@@ -22,4 +22,17 @@ public class AudioModel
       return max;
     }
   }
+
+  public float Mean
+  {
+    get
+    {
+      var avg = 0f;
+      foreach (var v in volumes)
+      {
+        avg += v;
+      }
+      return avg / volumes.Length;
+    }
+  }
 }
