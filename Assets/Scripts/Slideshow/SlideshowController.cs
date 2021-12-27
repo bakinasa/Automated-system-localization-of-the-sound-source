@@ -16,6 +16,7 @@ public class SlideshowController : MonoBehaviour
   {
     UpdateIndicator();
     quitButton.onClick.AddListener(Quit);
+    Screen.sleepTimeout = SleepTimeout.NeverSleep;
   }
 
   void UpdateIndicator()

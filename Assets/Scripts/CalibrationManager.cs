@@ -58,7 +58,6 @@ public class CalibrationManager : ISolver
 
   void PressCalibrate()
   {
-    print("here");
     var mx = values[0];
     foreach (var val in values)
     {
