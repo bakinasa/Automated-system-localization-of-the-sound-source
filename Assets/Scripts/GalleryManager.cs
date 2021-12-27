@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -41,9 +42,10 @@ public class GalleryManager : MonoBehaviour
   {
     var fnames = new List<string>();
     var info = new DirectoryInfo(Application.persistentDataPath);
+    var regex = @"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{7}\+\d{2}:\d{2}$";
     foreach (var file in info.GetFiles())
     {
-      if (file.Name != "prefs")
+      if (Regex.IsMatch(file.Name, regex))
         fnames.Add(file.FullName);
     }
     return fnames.ToArray();
